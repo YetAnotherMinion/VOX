@@ -5,5 +5,4 @@ Vox
 
 Requirements
 =============
-&nbsp;&nbsp;&nbsp;&nbsp;This project is designed to use Docker to host the server. To run on your machine first clone this repository.
-Then build the docker image using the shell script in the docker folder.
+&nbsp;&nbsp;&nbsp;&nbsp;This project is designed to use Docker to host the server. The client runs in userland on your machine.

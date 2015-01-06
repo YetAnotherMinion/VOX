@@ -7,6 +7,6 @@
 
 int main(int argc, char *argv[])
 {
-	printf("Hellow from server");
+	printf("Hello from server");
 	return 0;
 }

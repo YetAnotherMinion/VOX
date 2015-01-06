@@ -5,6 +5,9 @@
 #include <sys/socket.h>
 #include <errno.h>
 
+//locally defined files
+#include "../inc/chunks.h"
+
 int main(int argc, char *argv[])
 {
 	printf("Hello from server");

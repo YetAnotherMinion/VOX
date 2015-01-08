@@ -1,6 +1,10 @@
 #include <iostream>
 #include <sys/types.h>
 #include <sys/socket.h>
+//OpenGL
+#include <gl.h>
+#include <glu.h>
+#include <glut.h>
 
 //this project includes
 #include "../inc/client_constants.h"

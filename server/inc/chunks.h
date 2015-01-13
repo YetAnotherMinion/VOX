@@ -1,4 +1,7 @@
 
+struct FaceColor {
+	int a;
+};
 
 //octree chunck format dummy head node
 struct OctTreeNode {

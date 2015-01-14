@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	int portno = atoi(argv[2]);
 
 
-	struct sockaddr_in server_addr;
+	struct sockaddr_in server_addr,clilen,n;
 	//AF_INET is IPv4 protocol
 	int socketfiledescriptor = socket(AF_INET, SOCK_STREAM,0);
 

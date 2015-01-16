@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 
 //locally defined files
-#include "../inc/chunks.h"
+#include "chunks.h"
 
 int main(int argc, char *argv[])
 {

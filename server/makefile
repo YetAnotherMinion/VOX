@@ -5,7 +5,7 @@ IDIR = ./inc
 LDIR = ./lib
 ODIR = ./src/obj
 
-CFLAGS = -Wall -g -I$(IDIR)
+CFLAGS = -Wall -g -I$(IDIR) --pedantic-errors -std=c99
 # $< is dependencies (right) $@ is target
 # -o means the next token is the name of the executable
 

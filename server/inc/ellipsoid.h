@@ -7,6 +7,6 @@
 
 
 
-void ellipseLinearGenerator(uint32_t A, uint32_t B)
+void ellipseLinearGenerator(uint32_t A, uint32_t B);
 
 #endif

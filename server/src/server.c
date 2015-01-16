@@ -9,6 +9,7 @@
 
 //locally defined files
 #include "chunks.h"
+#include "ellipsoid.h"
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
 	//start listening for clients
 
 	listen(socketfd,5);
+
 
 	printf("Hello from server");
 	return 0;

@@ -32,6 +32,6 @@ void ellipse2DNext(struct Ellipse2DClosure* closure, struct Point2D* result);
 /*get only the next point on the surface in the direction defined
 direction = 0 -> move vector is along pos y
 direction = 1 -> move vector is along pos z */
-void ellipse3DNext(struct Ellipse3DClosure* closure, struct Point3D result, bool direction)
+void ellipse3DNext(struct Ellipse3DClosure* closure, struct Point3D result, bool direction);
 
 #endif

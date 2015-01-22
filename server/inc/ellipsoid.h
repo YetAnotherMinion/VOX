@@ -22,9 +22,20 @@ struct Ellipse2DClosure {
 	uint32_t B;
 	uint64_t x;
 	uint64_t y;
+	bool isErrorCalculated;
+	bignum* error;
 };
 /*For when we are moving along a surface*/
-
+struct Ellipse3DClosure {
+	uint32_t A;
+	uint32_t B;
+	uint32_t C;
+	uint64_t x;
+	uint64_t y;
+	uint64_t z;
+	bool isErrorCalculated;
+	bignum* error;
+};
 
 void ellipseLinearGenerator(uint32_t A, uint32_t B, struct Point2D* result);
 /*get only the next point from the point provided in the closure */

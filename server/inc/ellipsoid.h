@@ -2,6 +2,7 @@
 #define _ELLIPSOID_CAD_
 
 #include <stdint.h>
+#include "bignum.h"
 /*To voxelise a surface we test for voxels that have a
 center inside the surface. */
 

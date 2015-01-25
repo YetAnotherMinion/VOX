@@ -3,7 +3,7 @@
 
 struct bignum {
     uint32_t* register; /* for 32 bit compatibility */
-    uint8_t num_bytes;
+    uint8_t num_words;
 };
 /* name mangling to be class like */
 bool bignum_isEqual(struct bignum* a, struct bignum* b);

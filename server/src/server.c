@@ -6,7 +6,8 @@
 #include <errno.h>
 /*gives you htons() */
 #include <arpa/inet.h>
-
+/*gives you bzero */
+#include <strings.h>
 /*locally defined files */
 #include "chunks.h"
 #include "ellipsoid.h"
@@ -55,9 +56,22 @@ int main(int argc, char *argv[])
 		printf("ERROR on accept");
 		exit(1);
 	}
-	
+	bzero(buffer,256);
+	n = read(newsockfd, buffer, 255);
+	/*check that messages were actually read from the socket*/
+	if(n < 0) {
+		printf("ERROR reading from socket\n");
+		exit(1);
+	}
 
+	printf("This is the message: \n %s", buffer);
 
+	n = write(newsockfd, "I got your message",18);
+
+	if(n < 0) {
+		printf("ERROR writing to socket");
+		exit(1);
+	}
 
 	printf("Hello from server");
 	return 0;

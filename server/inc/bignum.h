@@ -2,7 +2,7 @@
 #define _BIGNUM_ 
 
 struct bignum {
-    uint32_t* register; /* for 32 bit compatibility */
+    uint32_t* reg; /* for 32 bit compatibility */
     uint8_t num_words;
 };
 /* name mangling to be class like */

@@ -10,13 +10,13 @@ bool bignum_isEqual(struct bignum* a, struct bignum* b) {
 	}
 	int i = 0;
 	while(i < b->num_words) {
-		if(a->register[i] != b->register[i]) {
+		if(a->reg[i] != b->reg[i]) {
 			return false;
 		}
 		i++;
 	}
 	while(i < a->num_words) {
-		if(a->register[i]) { return false; }
+		if(a->reg[i]) { return false; }
 		i++;
 	}
 }

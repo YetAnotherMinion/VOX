@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	int socketfd;
 	int newsockfd;
 	int portno;
-	int client_length;
+	socklen_t client_length;
 	struct sockaddr_in server_addr;
 	struct sockaddr_in client_addr;
 	int n;
@@ -47,6 +47,16 @@ int main(int argc, char *argv[])
 	/*start listening for clients */
 
 	listen(socketfd,5);
+	client_length = sizeof(client_addr);
+
+	/*accept a new connection from the client */
+	newsockfd = accept(socketfd, (struct sockaddr*) &client_addr, &client_length);
+	if(newsockfd < 0) {
+		printf("ERROR on accept");
+		exit(1);
+	}
+	
+
 
 
 	printf("Hello from server");

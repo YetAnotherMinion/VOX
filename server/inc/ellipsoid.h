@@ -2,6 +2,7 @@
 #define _ELLIPSOID_CAD_
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "bignum.h"
 /*To voxelise a surface we test for voxels that have a
 center inside the surface. */
@@ -24,7 +25,7 @@ struct Ellipse2DClosure {
 	uint64_t x;
 	uint64_t y;
 	bool isErrorCalculated;
-	bignum* error;
+	struct bignum* error;
 };
 /*For when we are moving along a surface*/
 struct Ellipse3DClosure {
@@ -35,7 +36,7 @@ struct Ellipse3DClosure {
 	uint64_t y;
 	uint64_t z;
 	bool isErrorCalculated;
-	bignum* error;
+	struct bignum* error;
 };
 
 void ellipseLinearGenerator(uint32_t A, uint32_t B, struct Point2D* result);

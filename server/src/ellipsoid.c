@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "ellipsoid.h"
 
 void ellipseLinearGenerator(uint32_t A, uint32_t B, struct Point2D* result) {

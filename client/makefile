@@ -4,7 +4,7 @@ SRC = ./src/
 #INC = ./inc/
 CFLAGS = -g -Wall
 
-LIB = -lGL -lglfw
+LIB = -lGL
 
 # $< is dependencies (right) $@ is target
 $(BIN)client : $(SRC)client.cpp

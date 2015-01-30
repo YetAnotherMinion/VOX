@@ -53,14 +53,14 @@ int main(int argc, char *argv[])
 	/*accept a new connection from the client */
 	newsockfd = accept(socketfd, (struct sockaddr*) &client_addr, &client_length);
 	if(newsockfd < 0) {
-		printf("ERROR on accept");
+		perror("ERROR on accept");
 		exit(1);
 	}
 	bzero(buffer,256);
 	n = read(newsockfd, buffer, 255);
 	/*check that messages were actually read from the socket*/
 	if(n < 0) {
-		printf("ERROR reading from socket\n");
+		perror("ERROR reading from socket\n");
 		exit(1);
 	}
 
@@ -69,10 +69,10 @@ int main(int argc, char *argv[])
 	n = write(newsockfd, "I got your message",18);
 
 	if(n < 0) {
-		printf("ERROR writing to socket");
+		perror("ERROR writing to socket");
 		exit(1);
 	}
 
-	printf("Hello from server");
+	printf("Hello from server\n");
 	return 0;
 }

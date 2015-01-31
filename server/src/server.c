@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <errno.h>
+#include <string.h>
 /*gives you htons() */
 #include <arpa/inet.h>
 /*gives you bzero */
@@ -54,14 +55,22 @@ int main(int argc, char *argv[])
 
 	/*accept a new connection from the client */
 	newsockfd = accept(socketfd, (struct sockaddr *) &client_addr, &client_length);
-	printf("accepted\n");
 	if(newsockfd < 0) {
 		perror("ERROR on accept");
 		exit(1);
 	}
+	printf("Connected to: %s:%d\n",inet_ntoa(client_addr.sin_addr),client_addr.sin_port);
+	bzero(buffer,256);
+	strncpy(buffer,"Welcome to one off chat client:\n",255);
+	n = write(newsockfd, buffer, strlen(buffer));
+
+	if(n < 0) {
+		perror("ERROR writing to socket");
+		exit(1);
+	}
+
 	bzero(buffer,256);
 	n = read(newsockfd, buffer, 255);
-	printf("return from reading\n");
 	/*check that messages were actually read from the socket*/
 	if(n < 0) {
 		perror("ERROR reading from socket\n");

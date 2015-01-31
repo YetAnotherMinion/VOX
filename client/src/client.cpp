@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	int newsockfd = connect(socketfd, servinfo->ai_addr, servinfo->ai_addrlen);
+	n = connect(socketfd, servinfo->ai_addr, servinfo->ai_addrlen);
 
 	if(n < 0){
 		perror("ERROR on connect");
@@ -61,14 +61,14 @@ int main(int argc, char *argv[])
 	char* msg = "Message from client!";
 	int len = strlen(msg);
 
-	n = send(newsockfd,msg, len, 0);
+	n = send(socketfd, msg, len, 0);
 
 	if(n < 0) {
-		fprintf(stderr, "ERROR on send\n");
+		perror("ERROR on send\n");
 		exit(1);
 	}
 
-	n = recv(newsockfd, (void*) buffer, 255, 0);
+	n = recv(socketfd, (void*) buffer, 255, 0);
 	if(n < 0) {
 		fprintf(stderr, "ERROR on recv\n");
 		exit(1);

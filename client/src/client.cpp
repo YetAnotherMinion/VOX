@@ -78,6 +78,8 @@ int main(int argc, char *argv[])
 		printf("The message was: \n%s\n",buffer );
 	}
 
+	n = close(socketfd);
+
 	std::cout << "hello client" << std::endl;
 
 	return 0;

@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 	struct sockaddr_in client_addr;
 	int n;
 	char buffer[256];
+
 	/*open the socket */
 	socketfd = socket(AF_INET, SOCK_STREAM, 0);
 	/*ckeck that the socket is valid */
@@ -75,6 +76,9 @@ int main(int argc, char *argv[])
 		perror("ERROR writing to socket");
 		exit(1);
 	}
+
+	n = close(newsockfd);
+	n = close(socketfd);
 
 	printf("Hello from server\n");
 	return 0;

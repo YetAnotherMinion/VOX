@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <unistd.h> /*for read and write*/
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <errno.h>
@@ -32,32 +32,35 @@ int main(int argc, char *argv[])
 		printf("Error in socket creation\n");
 		exit(1);
 	}
-
+	bzero((char *) &server_addr, sizeof(server_addr));
 	portno = atoi(argv[2]);
 	server_addr.sin_family = AF_INET;
 	/*add the ip address of the socket */
+	/*server_addr.sin_addr.s_addr = INADDR_ANY; */
 	server_addr.sin_addr.s_addr = inet_addr(argv[1]);
 	/*convert the bost byte order and network byte order with htons() */
 	server_addr.sin_port = htons(portno);
 	/*we will need to recast the sockaddr_in struct to general */
 	/*type sockaddr */
-	if(bind(socketfd, (const struct sockaddr *) &server_addr, sizeof(server_addr)) < 0 ) {
+	if( bind(socketfd, (const struct sockaddr *) &server_addr, sizeof(server_addr)) < 0 ) {
 		printf("error in binding\n");
 		exit(1);
 	}
 	/*start listening for clients */
-
+	printf("Listening for clients\n");
 	listen(socketfd,5);
 	client_length = sizeof(client_addr);
 
 	/*accept a new connection from the client */
-	newsockfd = accept(socketfd, (struct sockaddr*) &client_addr, &client_length);
+	newsockfd = accept(socketfd, (struct sockaddr *) &client_addr, &client_length);
+	printf("accepted\n");
 	if(newsockfd < 0) {
 		perror("ERROR on accept");
 		exit(1);
 	}
 	bzero(buffer,256);
 	n = read(newsockfd, buffer, 255);
+	printf("return from reading\n");
 	/*check that messages were actually read from the socket*/
 	if(n < 0) {
 		perror("ERROR reading from socket\n");

@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 /*gives you bzero */
 #include <strings.h>
+/*gives concurrency*/
+#include <mpi.h>
 /*locally defined files */
 #include "chunks.h"
 #include "ellipsoid.h"

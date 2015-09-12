@@ -20,8 +20,11 @@ OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
 all: ./bin/server
 
-$(BDIR)/server : ./src/obj/server.o $(OBJ)
-	$(CC) $< -o $@ $(CFLAGS)
+$(BDIR)/server: $(ODIR)/server.o \
+				$(ODIR)/chunks.o \
+				$(ODIR)/octree.o \
+				$(ODIR)/ellipsoid.o
+	$(CC) $(CFLAGS) $^ -o $@ 
 
 $(ODIR)/server.o : ./src/server.c 
 	$(CC) -c $(CFLAGS) $< -o $@

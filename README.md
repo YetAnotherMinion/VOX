@@ -1,6 +1,6 @@
 Vox
 ============
-![alt build](https://travis-ci.org/YetAnotherMinion/VOX.svg)
+[![Build Status](https://travis-ci.org/YetAnotherMinion/VOX.svg)](https://travis-ci.org/YetAnotherMinion/VOX)
 
 &nbsp;&nbsp;&nbsp;&nbsp;A voxel based 3D cellular automata simulator program designed for distributed deployment and remote access.
 

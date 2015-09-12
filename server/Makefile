@@ -21,19 +21,19 @@ OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 all: ./bin/server
 
 $(BDIR)/server : ./src/obj/server.o $(OBJ)
-	gcc $< -o $@ $(CFLAGS)
+	$(CC) $< -o $@ $(CFLAGS)
 
 $(ODIR)/server.o : ./src/server.c 
-	gcc -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(ODIR)/chunks.o : $(SDIR)/chunks.c $(DEPS)
-	gcc -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(ODIR)/octree.o : $(SDIR)/octree.c $(DEPS)
-	gcc -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(ODIR)/ellipsoid.o : $(SDIR)/ellipsoid.c $(DEPS)
-	gcc -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 #prevent anything from happening to a file named clean
 .FAKE : clean

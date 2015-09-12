@@ -10,7 +10,9 @@
 /*gives you bzero */
 #include <strings.h>
 /*gives concurrency*/
+/* commented out to get travis working quicker
 #include <mpi.h>
+*/
 /*locally defined files */
 #include "chunks.h"
 #include "ellipsoid.h"

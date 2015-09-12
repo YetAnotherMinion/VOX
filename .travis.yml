@@ -1,16 +1,30 @@
 language: cpp
+#run on latest container based infrastructure
+sudo: false
 
 compiler:
   - clang
   - gcc
 
+#workaround for container based packages
+addons:
+  apt:
+    packages:
+    - gfortran
+    - openmpi-bin
+    - openmpi-common
+    - libopenmpi-dev
+
 before_install:
-  - sudo apt-get install -q gfortran openmpi-bin openmpi-common libopenmpi-dev;
+  - echo "not using sudo"
+#  - apt-get install -q gfortran openmpi-bin openmpi-common libopenmpi-dev;
 
 #create the bin directories
 before_script:
   - mkdir client/bin
   - mkdir server/bin
+  - mkdir client/obj
+  - mkdir server/obj
   - MPIEXEC='mpiexec'
 
 script: make

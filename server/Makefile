@@ -3,7 +3,7 @@ BDIR = ./bin
 SDIR = ./src
 IDIR = ./inc
 LDIR = ./lib
-ODIR = ./src/obj
+ODIR = ./obj
 
 CFLAGS = -Wall -g -I$(IDIR) --pedantic-errors -std=c99
 # $< is dependencies (right) $@ is target

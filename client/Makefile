@@ -2,6 +2,7 @@
 BIN = ./bin
 SRC = ./src
 INC = ./inc
+OBJ = ./obj
 CFLAGS = -g -Wall
 
 LIB = -lGL

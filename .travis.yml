@@ -4,8 +4,14 @@ compiler:
   - clang
   - gcc
 
+before_install:
+  - sudo apt-get install -q gfortran openmpi-bin openmpi-common libopenmpi-dev;
+
+#create the bin directories
 before_script:
-  - echo "before script"
+  - mkdir client/bin
+  - mkdir server/bin
+  - MPIEXEC='mpiexec'
 
 script: make
 

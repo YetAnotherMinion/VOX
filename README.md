@@ -1,5 +1,6 @@
 Vox
 ============
+https://travis-ci.org/YetAnotherMinion/VOX.svg
 &nbsp;&nbsp;&nbsp;&nbsp;A voxel based 3D cellular automata simulator program designed for distributed deployment and remote access.
 
 

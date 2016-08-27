@@ -8,6 +8,9 @@ use glium::DisplayBuild;
 // to fill a `Frame` with color we need to import `Surface` trait
 use glium::Surface;
 
+use std::path::Path;
+use std::fs::File;
+use std::borrow::Borrow;
 
 #[derive(Copy, Clone)]
 struct ArbitraryNameVertex {
@@ -15,6 +18,31 @@ struct ArbitraryNameVertex {
 }
 
 implement_vertex!(ArbitraryNameVertex, position);
+
+fn load_glsl_resource(path: &Path) -> String {
+    use std::io::{Read, Write, stdout};
+    use std::error::Error;
+
+    let mut file = match File::open(path) {
+        // The `description` method of io::Error returns a string that
+        // describes the error
+        Err(why) => panic!("could not read {}: {}", path.display(),
+                                                    why.description()),
+        Ok(f) => f,
+    };
+    
+    let mut buffer = String::new();
+    let bytes_read = match file.read_to_string(&mut buffer) {
+        Ok(bytes) => bytes,
+        Err(err) => panic!("could not read for files"),
+    };
+  
+    //println!("Bytes read: {}", bytes_read);
+
+    //println!("Buffer contents:\n{}", buffer);
+    //stdout().flush();
+    buffer
+}
 
 fn main() {
     let display = glium::glutin::WindowBuilder::new().build_glium().unwrap();
@@ -25,19 +53,27 @@ fn main() {
 
     let shape = vec![ vertex1, vertex2, vertex3];
     let vertex_buffer = glium::VertexBuffer::new(&display, &shape).unwrap();
-
+    
     let mut t: f32 = -0.5;
 
-    let vertex_shader_src = r#"
-        #version 130
-        in vec2 position;
-        uniform float t;
-        void main() {
-            vec2 pos =  position;
-            pos.x += t;
-            gl_Position = vec4(pos, 0.0, 1.0);
-        }
-    "#;
+    let vertex_shader_path = Path::new("./src/example_1.vert");
+    // kick the can about handling a loading error down the road
+    use std::io::{Error, ErrorKind};
+
+    let vertex_shader_src = load_glsl_resource(&vertex_shader_path);
+
+    return;
+    //let vertex_shader_src = r#"
+    //    #version 130
+    //    
+    //    in vec2 position;
+    //    
+    //    uniform mat4 matrix;
+    //    
+    //    void main() {
+    //        gl_Position = matrix * vec4(position, 0.0, 1.0);
+    //    }
+    //"#;
     
     let fragment_shader_src = r#"
         #version 130
@@ -53,6 +89,15 @@ fn main() {
         if t > 0.5 {
             t = -0.5;
         }
+
+        let uniforms = uniform! {
+            matrix: [
+                [ t.cos(), t.sin(), 0.0, 0.0 ],
+                [-t.sin(), t.cos(), 0.0, 0.0 ],
+                [0.0, 0.0, 1.0, 0.0 ],
+                [1.0, 0.0, 0.0, 1.0f32 ],
+            ]
+        };
         // draw a test image
         let mut target = display.draw();
         target.clear_color(0.0, 0.0, 1.0, 1.0);
@@ -60,12 +105,12 @@ fn main() {
         let indicies = glium::index::NoIndices(glium::index::PrimitiveType::TrianglesList);
         
         let program = glium::Program::from_source(&display,
-                                                  vertex_shader_src,
+                                                  vertex_shader_src.borrow(),
                                                   fragment_shader_src,
                                                   None).unwrap();
 
         target.draw(&vertex_buffer, &indicies, &program,
-                    &uniform! { t: t },
+                    &uniforms,
                     &Default::default()).unwrap();
         target.finish().unwrap();
 

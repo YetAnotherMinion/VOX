@@ -57,31 +57,11 @@ fn main() {
     let mut t: f32 = -0.5;
 
     let vertex_shader_path = Path::new("./src/example_1.vert");
+    let frag_shader_path = Path::new("./src/example_1.frag");
     // kick the can about handling a loading error down the road
-    use std::io::{Error, ErrorKind};
-
     let vertex_shader_src = load_glsl_resource(&vertex_shader_path);
+    let fragment_shader_src = load_glsl_resource(&frag_shader_path);
 
-    return;
-    //let vertex_shader_src = r#"
-    //    #version 130
-    //    
-    //    in vec2 position;
-    //    
-    //    uniform mat4 matrix;
-    //    
-    //    void main() {
-    //        gl_Position = matrix * vec4(position, 0.0, 1.0);
-    //    }
-    //"#;
-    
-    let fragment_shader_src = r#"
-        #version 130
-        out vec4 color;
-        void main() {
-            color = vec4(1.0, 0.0, 0.0, 1.0);
-        }
-    "#;
     // prevent the window from immediately closing by polling forever until we
     // recieve a `Closed` event
     loop {
@@ -106,7 +86,7 @@ fn main() {
         
         let program = glium::Program::from_source(&display,
                                                   vertex_shader_src.borrow(),
-                                                  fragment_shader_src,
+                                                  fragment_shader_src.borrow(),
                                                   None).unwrap();
 
         target.draw(&vertex_buffer, &indicies, &program,

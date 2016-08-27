@@ -4,3 +4,7 @@
 Cargo.lock
 
 client/target/*
+
+
+# resource file
+client/src/teapot.rs

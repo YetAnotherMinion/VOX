@@ -4,6 +4,7 @@ extern crate glium;
 // we use the image crate to decode the image format that stores our texture
 extern crate image;
 
+mod teapot;
 // We want to create a window with an OpenGL context handled by glium, instead
 // of calling `build()` we will call `build_glium()` which is defined  in the
 // `glium::DisplayBuild` trait
@@ -48,6 +49,30 @@ fn load_glsl_resource(path: &Path) -> String {
     buffer
 }
 
+fn load_texture(path: &Path) -> Vec<u8> {
+    use std::io::{Read, Write, stdout};
+    use std::error::Error;
+
+    let mut file = match File::open(path) {
+        // The `description` method of io::Error returns a string that
+        // describes the error
+        Err(why) => panic!("could not read {}: {}", path.display(),
+                                                    why.description()),
+        Ok(f) => f,
+    };
+    
+    let mut buffer = Vec::<u8>::new();
+    let bytes_read = match file.read_to_end(&mut buffer) {
+        Ok(bytes) => bytes,
+        Err(err) => panic!("could not read for files"),
+    };
+  
+    //println!("Bytes read: {}", bytes_read);
+
+    //println!("Buffer contents:\n{}", buffer);
+    //stdout().flush();
+    buffer
+}
 fn main() {
     let display = glium::glutin::WindowBuilder::new().build_glium().unwrap();
         
@@ -65,12 +90,13 @@ fn main() {
 
     let vertex_shader_path = Path::new("./src/example_1.vert");
     let frag_shader_path = Path::new("./src/example_1.frag");
+    let texture_path = Path::new("./src/example_1.png");
     // kick the can about handling a loading error down the road
     let vertex_shader_src = load_glsl_resource(&vertex_shader_path);
     let fragment_shader_src = load_glsl_resource(&frag_shader_path);
 
     use std::io::Cursor;
-    let image = image::load(Cursor::new(&include_bytes!("example_1.png")[..]),
+    let image = image::load(Cursor::new(load_texture(&texture_path)),
                             image::PNG).unwrap().to_rgba();
     let image_dimensions = image.dimensions();
     let image = glium::texture::RawImage2d::from_raw_rgba_reversed(image.into_raw(), image_dimensions);

@@ -1,9 +1,6 @@
 [package]
-name = "vox-client"
+name = "vox-server"
 version = "0.1.0"
 authors = ["YetAnotherMinion <yam@thinkalexandria.com>"]
 
 [dependencies]
-glium = "*"
-image = "*"
-time = "*"

@@ -2,14 +2,12 @@ Vox
 ============
 [![Build Status](https://travis-ci.org/YetAnotherMinion/VOX.svg)](https://travis-ci.org/YetAnotherMinion/VOX) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/YetAnotherMinion/VOX?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-&nbsp;&nbsp;&nbsp;&nbsp;A voxel based 3D cellular automata simulator program designed for distributed deployment and remote access.
+&nbsp;&nbsp;&nbsp;&nbsp;A voxel based 3D cellular automata simulator program
+whose only feature is performance. Every other feature can and will be
+sacrificed to increase the scale and speed of the simulation. This is not a
+game, it is a tool to placate the drive to create.
 
 
 Requirements
 =============
-&nbsp;&nbsp;&nbsp;&nbsp;This project is designed to use Docker to host the server. The client runs in userland on your machine.
-
-To run the server you need the IPv4 numbers and dots format of the server IP adress and a port number. <br>
-`$ ./server 127.0.0.1 50008` <br>
-The client can perform address resolution, although right now using localhost does not resolve to a server running on 127.0.0.1, you must use the same IP address as the server is running. <br>
-`$ ./client 127.0.0.1 50008`
+Nothing works right now.

@@ -6,3 +6,4 @@ authors = ["YetAnotherMinion <yam@thinkalexandria.com>"]
 [dependencies]
 glium = "*"
 image = "*"
+time = "*"

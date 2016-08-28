@@ -4,6 +4,9 @@ extern crate glium;
 // we use the image crate to decode the image format that stores our texture
 extern crate image;
 
+// measure how long each loop takes
+extern crate time;
+
 mod teapot;
 // We want to create a window with an OpenGL context handled by glium, instead
 // of calling `build()` we will call `build_glium()` which is defined  in the
@@ -67,10 +70,6 @@ fn load_texture(path: &Path) -> Vec<u8> {
         Err(err) => panic!("could not read for files"),
     };
   
-    //println!("Bytes read: {}", bytes_read);
-
-    //println!("Buffer contents:\n{}", buffer);
-    //stdout().flush();
     buffer
 }
 fn main() {
@@ -103,9 +102,15 @@ fn main() {
 
     let texture = glium::texture::Texture2d::new(&display, image).unwrap();
 
+    let mut before = time::precise_time_ns();
+
     // prevent the window from immediately closing by polling forever until we
     // recieve a `Closed` event
     loop {
+        let mut after = time::precise_time_ns();
+        println!("Took: {}ms", (after - before) as f64 / 1000000.0);
+        before = after;
+
         t += 0.02;
         if t > 0.5 {
             t = -0.5;

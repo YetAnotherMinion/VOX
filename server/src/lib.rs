@@ -1,3 +1,9 @@
-pub fn hello() {
-    println!("Hello World");
+
+
+struct Chunk {
+        
+}
+
+impl Chunk {
+
 }

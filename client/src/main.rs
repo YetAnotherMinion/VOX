@@ -145,6 +145,9 @@ fn main() {
         for ev in display.poll_events() {
             match ev {
                 glium::glutin::Event::Closed => return, // window closed by user
+                glium::glutin::Focused(has_focus) => {},
+                glium::glutin::MouseMove(x, y) => {},
+                glium::glutin::KeyboardInput(elm_st, scan_code, virt_code) => {},
                 _ => (),
             }
         }
